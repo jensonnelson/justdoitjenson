@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jenson Nelson — Nike Positioning Playbook</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f4f0;
+    --orange: #FF4713;
+    --mid: #1c1c1c;
+    --dim: #3a3a3a;
+    --rule: rgba(255,255,255,0.08);
+    --serif: 'Bebas Neue', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    color: var(--orange);
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(245,244,240,0.5);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'NIKE';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--serif);
+    font-size: clamp(200px, 30vw, 420px);
+    color: rgba(255,71,19,0.04);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(52px, 8vw, 110px);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+  .hero-title span { color: var(--orange); }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(245,244,240,0.55);
+    max-width: 520px;
+    line-height: 1.7;
+    border-left: 2px solid var(--orange);
+    padding-left: 20px;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    right: 48px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,244,240,0.25);
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .scroll-hint::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 60px;
+    background: rgba(255,71,19,0.4);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 120px 48px;
+    border-top: 1px solid var(--rule);
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    max-width: 80px;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 40px;
+  }
+  h3 {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    margin-top: 40px;
+  }
+  p {
+    color: rgba(245,244,240,0.75);
+    max-width: 740px;
+    margin-bottom: 20px;
+  }
+  strong { color: var(--white); font-weight: 500; }
+
+  /* CARDS GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+  .card {
+    background: var(--mid);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--orange);
+    transition: height 0.4s ease;
+  }
+  .card:hover::before { height: 100%; }
+  .card-num {
+    font-family: var(--serif);
+    font-size: 52px;
+    color: rgba(255,71,19,0.15);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .card h4 {
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+  .card p {
+    font-size: 14px;
+    color: rgba(245,244,240,0.55);
+    margin: 0;
+    max-width: 100%;
+  }
+
+  /* RESUME BLOCK */
+  .resume-block {
+    background: var(--mid);
+    padding: 64px;
+    margin-top: 48px;
+    border-left: 3px solid var(--orange);
+  }
+  .resume-name {
+    font-family: var(--serif);
+    font-size: 48px;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .resume-title {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .resume-contact {
+    font-size: 13px;
+    color: rgba(245,244,240,0.4);
+    margin-bottom: 48px;
+    font-style: italic;
+  }
+  .resume-section-head {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--orange);
+    border-bottom: 1px solid rgba(255,71,19,0.2);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    margin-top: 36px;
+  }
+  .resume-summary {
+    font-size: 15px;
+    color: rgba(245,244,240,0.8);
+    line-height: 1.75;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .skill-tag {
+    background: rgba(255,71,19,0.1);
+    border: 1px solid rgba(255,71,19,0.2);
+    padding: 4px 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(245,244,240,0.7);
+    text-transform: uppercase;
+  }
+  .job-block { margin-bottom: 36px; }
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .job-title-co {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .job-date {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(245,244,240,0.35);
+    text-transform: uppercase;
+  }
+  .job-company {
+    font-size: 12px;
+    color: rgba(255,71,19,0.7);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+  .job-bullets {
+    list-style: none;
+    padding: 0;
+  }
+  .job-bullets li {
+    font-size: 14px;
+    color: rgba(245,244,240,0.65);
+    padding: 6px 0 6px 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    max-width: 100%;
+  }
+  .job-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-size: 12px;
+  }
+  .job-bullets li strong { color: var(--white); }
+
+  /* PITCH */
+  .pitch-box {
+    background: var(--mid);
+    border-left: 3px solid var(--orange);
+    padding: 48px;
+    margin-top: 48px;
+    font-size: 18px;
+    line-height: 1.75;
+    color: rgba(245,244,240,0.85);
+    max-width: 100%;
+  }
+  .pitch-box em {
+    color: var(--orange);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* GAPS */
+  .gap-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .gap-card { background: var(--mid); padding: 36px; }
+  .gap-card.fix { border-top: 2px solid var(--orange); }
+  .gap-card.problem { border-top: 2px solid #444; }
+  .gap-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,244,240,0.3);
+    margin-bottom: 12px;
+  }
+  .gap-card h4 { font-size: 15px; font-weight: 500; margin-bottom: 10px; color: var(--white); }
+  .gap-card p { font-size: 14px; color: rgba(245,244,240,0.55); margin: 0; max-width: 100%; }
+
+  /* OUTREACH */
+  .outreach-box {
+    background: var(--mid);
+    padding: 48px;
+    margin-top: 32px;
+    border-radius: 0;
+  }
+  .outreach-box h4 {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+  .outreach-box p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,244,240,0.75);
+    max-width: 100%;
+    font-style: italic;
+    border-left: 1px solid rgba(255,71,19,0.3);
+    padding-left: 24px;
+    margin: 0;
+  }
+
+  /* PORTFOLIO STRUCTURE */
+  .portfolio-steps {
+    counter-reset: step;
+    margin-top: 48px;
+  }
+  .portfolio-step {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .step-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    color: rgba(255,71,19,0.25);
+    line-height: 1;
+  }
+  .step-content h4 { font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+  .step-content p { font-size: 14px; color: rgba(245,244,240,0.55); max-width: 100%; margin: 0; }
+
+  /* LINKEDIN */
+  .linkedin-box {
+    background: var(--mid);
+    padding: 48px;
+    margin-top: 48px;
+    border-left: 3px solid #0a66c2;
+  }
+  .linkedin-box p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,244,240,0.8);
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 48px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 12px; color: rgba(245,244,240,0.25); margin: 0; max-width: 100%; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.8s ease 0.2s both; }
+  .hero-title { animation: fadeUp 0.8s ease 0.4s both; }
+  .hero-sub { animation: fadeUp 0.8s ease 0.6s both; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px 60px; }
+    section { padding: 80px 24px; }
+    .grid-2, .grid-3, .gap-row { grid-template-columns: 1fr; }
+    .resume-block { padding: 32px 24px; }
+    .pitch-box, .outreach-box, .linkedin-box { padding: 32px 24px; }
+    footer { padding: 40px 24px; flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">JN × NIKE</div>
+  <ul class="nav-links">
+    <li><a href="#positioning">Positioning</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#pitch">Pitch</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#gaps">Gaps</a></li>
+    <li><a href="#outreach">Outreach</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Nike Career Strategy · Jenson Nelson · 2025</div>
+  <h1 class="hero-title">IDEAS INTO <span>PRODUCT.</span><br>NOT JUST VISUALS.</h1>
+  <p class="hero-sub">A complete playbook for landing a design role at Nike — resume, positioning, portfolio structure, pitch, and outreach.</p>
+  <div class="scroll-hint">Scroll</div>
+</div>
+
+<!-- POSITIONING -->
+<section id="positioning">
+  <div class="section-label">01 · Strategic Positioning</div>
+  <h2>WHERE YOU WIN<br>AT NIKE</h2>
+  <p>Your background is unusually broad in the right ways. You're not just a graphic designer — you're a designer who has moved product, built systems, and managed the full supply chain. That's the profile Nike hires for at the senior level. Here's where to focus.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-num">01</div>
+      <h4>Primary Target</h4>
+      <p><strong style="color:#FF4713">Senior Graphic Designer — Apparel or Footwear</strong><br><br>Your strongest lane. You have color system thinking, CMF execution, seasonal collection experience, and retail-scale production credibility. This is your highest-probability role.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <h4>Secondary Target</h4>
+      <p><strong style="color:#FF4713">Senior Color Designer — CMF</strong><br><br>Your explicit CMF language, palette curation work, and material storytelling experience map cleanly here. Lean into the candle line (vessel + finish + material decisions) as proof of CMF thinking.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <h4>Tertiary Target</h4>
+      <p><strong style="color:#FF4713">Brand Graphic Designer — Jordan or Sportswear</strong><br><br>Your cultural fluency + brand identity background makes you credible here. Jordan Brand values designers who understand culture, not just product specs.</p>
+    </div>
+  </div>
+
+  <h3>Your Core Narrative</h3>
+  <p>You are a <strong>concept-to-consumer designer</strong> who can hold a design idea from trend board through to vendor-ready production file — across color, material, graphic, and packaging. Most designers own one end of that chain. You own all of it. That's rare, and that's your edge.</p>
+  <p>Frame yourself as: <strong>"A culturally-rooted graphic and product designer who builds systems, not just assets — and drives measurable revenue with them."</strong></p>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-label">02 · Optimized Resume</div>
+  <h2>NIKE-READY<br>RESUME</h2>
+  <p>One synthesized, ATS-optimized version pulling the strongest material from all your drafts. Concise, metric-forward, no fluff.</p>
+
+  <div class="resume-block">
+    <div class="resume-name">JENSON NELSON</div>
+    <div class="resume-title">Senior Designer · Color, Graphics & Product Design</div>
+    <div class="resume-contact">Portland, OR · (661) 400-8686 · jensonnelson@gmail.com · jensonnelson.com · LinkedIn</div>
+
+    <div class="resume-section-head">Professional Summary</div>
+    <p class="resume-summary">Multidisciplinary Senior Designer with 13+ years translating cultural insight and trend intelligence into product, color, and graphic systems across footwear, apparel, packaging, and retail. Proven track record of driving measurable results — $19.83M in product sales, 21% YoY growth, $1.2M in secured funding — while managing concept-to-consumer creative across color, CMF, graphics, and packaging. Equally fluent in brand storytelling and vendor-ready production. Built for fast-moving, cross-functional environments where design decisions drive business outcomes.</p>
+
+    <div class="resume-section-head">Core Expertise</div>
+    <div class="skills-row">
+      <span class="skill-tag">Color Theory & Palette Curation</span>
+      <span class="skill-tag">CMF Execution</span>
+      <span class="skill-tag">Footwear Color Blocking</span>
+      <span class="skill-tag">Apparel Graphics</span>
+      <span class="skill-tag">Seasonal Collections</span>
+      <span class="skill-tag">Product & Packaging Design</span>
+      <span class="skill-tag">Material Storytelling</span>
+      <span class="skill-tag">Brand Identity Systems</span>
+      <span class="skill-tag">Graphic Systems Design</span>
+      <span class="skill-tag">Print · Pattern · Typography</span>
+      <span class="skill-tag">Trend Research</span>
+      <span class="skill-tag">Cultural Translation</span>
+      <span class="skill-tag">Production-Ready Files & Dielines</span>
+      <span class="skill-tag">International Vendor Management</span>
+      <span class="skill-tag">PLM · SAP</span>
+      <span class="skill-tag">Adobe Creative Suite</span>
+      <span class="skill-tag">Figma</span>
+      <span class="skill-tag">3D Visualization</span>
+      <span class="skill-tag">AI-Assisted Design</span>
+      <span class="skill-tag">Cross-Functional Collaboration</span>
+    </div>
+
+    <div class="resume-section-head">Experience</div>
+
+    <div class="job-block">
+      <div class="job-header">
+        <span class="job-title-co">Senior Product & Graphic Designer</span>
+        <span class="job-date">2020 – Present</span>
+      </div>
+      <div class="job-company">Freelance & Studio Projects · Portland, OR</div>
+      <ul class="job-bullets">
+        <li>Led <strong>concept-to-consumer product creation</strong> for a luxury candle line retailed through Costco, IKEA, TJX, and Safeway — directing vessel design, CMF decisions (material, finish, lid), and label graphics while managing international vendor relationships across production cycles.</li>
+        <li>Directed full brand identity and packaging system for Nostos International Grocery — building a culturally rooted visual ecosystem spanning logo, color palette, typography, packaging, signage, uniforms, and materials designed to scale across digital and physical retail globally.</li>
+        <li>Led strategic rebrand of CT Defense → Modus: developed name, identity system, investor deck, RFP templates, and brand collateral. <strong>New brand secured $1.2M in private funding within two months.</strong></li>
+        <li>Founded and scaled Good Party, a private-label brand — managing product design, sourcing, packaging, and e-commerce across Etsy, Amazon, and Shopify, end-to-end.</li>
+        <li>Designed campaign visual systems for political organizations — including digital ads, static and motion assets, and direct mail — <strong>increasing user engagement by 40% and CTR by 40%</strong> through performance-tested creative.</li>
+        <li>Built scalable design asset libraries and brand systems for lifestyle and CPG clients, partnering with agencies and developers to maintain brand fidelity at speed.</li>
+      </ul>
+    </div>
+
+    <div class="job-block">
+      <div class="job-header">
+        <span class="job-title-co">Senior Graphic & Product Designer</span>
+        <span class="job-date">2017 – 2020</span>
+      </div>
+      <div class="job-company">99 Cents Only Stores · Commerce, CA</div>
+      <ul class="job-bullets">
+        <li>Designed products, packaging, and seasonal in-store campaigns that <strong>generated $19.83M in sales in 2019 — driving a 21% year-over-year growth</strong> forecast across the product category.</li>
+        <li>Built trend-driven seasonal graphic systems fusing color forecasting, cultural insight, and high-volume retail execution across toys, beauty, apparel, and accessories at scale.</li>
+        <li>Managed international vendor communication — coordinating timelines, specs, and production files to <strong>cut production turnaround by 25%</strong> without quality compromise.</li>
+        <li>Partnered with merchandising and sourcing via PLM and SAP workflows to align design intent with pricing and manufacturing constraints, delivering end-to-end creative.</li>
+      </ul>
+    </div>
+
+    <div class="job-block">
+      <div class="job-header">
+        <span class="job-title-co">Graphic & Product Designer / Production Artist</span>
+        <span class="job-date">2012 – 2016</span>
+      </div>
+      <div class="job-company">American Apparel · Los Angeles, CA</div>
+      <ul class="job-bullets">
+        <li>Designed apparel graphics, branded merchandise, and production-ready packaging for iconic LA-based fashion basics brand, working directly with domestic vendors and production teams.</li>
+        <li>Established fit standards and measurement spec sheets; created production-ready colorways, graphic files, and layouts across seasonal apparel collections.</li>
+        <li>Collaborated cross-functionally with design, marketing, and production to align creative with timelines, brand standards, and manufacturing requirements.</li>
+      </ul>
+    </div>
+
+    <div class="resume-section-head">Education & Creative Ventures</div>
+    <p class="resume-summary" style="font-size:14px; color:rgba(245,244,240,0.6)">
+      California State University, Long Beach · Multi/Interdisciplinary Studies · 2005–2007<br><br>
+      Exhibited painter · jensonnelson.com · Regional Arts & Culture Council Grant Reviewer (2023–24) · CoachArt Visual Arts Coach (2022)
+    </p>
+
+    <div class="resume-section-head">Technical</div>
+    <p class="resume-summary" style="font-size:14px; color:rgba(245,244,240,0.6)">
+      Adobe Illustrator · Photoshop · InDesign · After Effects · Premiere Pro · Figma · Keynote · PowerPoint · Acrobat · PLM · SAP · Asana · 3D Visualization · AI-Assisted Design Tools
+    </p>
+  </div>
+</section>
+
+<!-- ELEVATOR PITCH -->
+<section id="pitch">
+  <div class="section-label">03 · Elevator Pitch</div>
+  <h2>YOUR<br>NIKE PITCH</h2>
+  <p>Versatile enough to use in interviews, networking calls, or as your portfolio intro. Keep it under 60 seconds spoken.</p>
+
+  <div class="pitch-box">
+    "I'm a Senior Designer with 13 years working across color, graphics, and product — <em>not as separate disciplines, but as one integrated system.</em> I've built seasonal collections that drove $19.83M in sales, led full CMF execution from concept through international vendor delivery, and created brand identities that secured $1.2M in funding. What I bring to Nike is the ability to <em>translate cultural insight into product decisions</em> — not just visuals — and move fast doing it. I understand how design needs to work at retail scale, across manufacturing constraints, and in collaboration with merchandising, development, and sourcing. That's the part of the job I find most energizing."
+  </div>
+
+  <h3>Interview Version (when asked "tell me about yourself")</h3>
+  <div class="pitch-box" style="font-size:16px;">
+    "My background sits at the intersection of graphic design, color, and product. I started at American Apparel doing apparel graphics and production, moved into high-volume product and packaging design at 99 Cents Only — where I drove $19.83M in category sales — and for the past five years I've been running studio projects where I've done everything from CMF product development to full brand identity systems. I'm in Portland, which honestly put Nike on my radar seriously. The work I'm most proud of is the kind where I can show you a concept board and then show you the product on shelf. That full arc is where I operate."
+  </div>
+</section>
+
+<!-- PORTFOLIO STRUCTURE -->
+<section id="portfolio">
+  <div class="section-label">04 · Portfolio Structure</div>
+  <h2>PORTFOLIO THAT<br>FEELS NIKE-READY</h2>
+  <p>The site you like (ybdesign.ai) works because it's editorial, quiet, and case-study-forward. Your work should feel the same way. No scrolling galleries. No everything. Three to five strong case studies that show the full arc of thinking → making.</p>
+
+  <div class="portfolio-steps">
+    <div class="portfolio-step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Hero: One Line, One Role, No Noise</h4>
+        <p>Lead with a single bold statement. "Senior Designer. Color · Graphics · Product." Large type, your name, a reel or static hero image of your strongest visual work. Navigation: Case Studies / About / Contact. Nothing else. If they want to know your skills, the work will tell them.</p>
+      </div>
+    </div>
+    <div class="portfolio-step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>Case Study 1 — Candle Line (CMF + Product Creation)</h4>
+        <p>This is your CMF story. Show: trend/mood board → material + finish decisions → vessel design → label graphics → final shelf product. Frame it as: "From cultural trend to retail shelf." Include retailer logos (Costco, IKEA, TJX, Safeway) for instant credibility.</p>
+      </div>
+    </div>
+    <div class="portfolio-step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Case Study 2 — 99 Cents Only (Seasonal Graphic System at Scale)</h4>
+        <p>This is your high-volume, metric-driven story. Show the seasonal color system, graphic assets, and packaging in context. Lead with the number: "$19.83M / 21% YoY." Then show the design decisions that got there. Trend input → color palette → graphic application → in-store reality.</p>
+      </div>
+    </div>
+    <div class="portfolio-step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Case Study 3 — Nostos Grocery / Brand System</h4>
+        <p>This is your brand identity + cultural storytelling story. Show the full system: logo, color palette rationale, typography, packaging, signage, uniforms. Emphasize that this was built to scale across regions and formats. This proves systems thinking.</p>
+      </div>
+    </div>
+    <div class="portfolio-step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h4>Case Study 4 — Nike-Spec Concept (Self-Initiated)</h4>
+        <p><strong>Critical gap-filler.</strong> Create a spec project: a seasonal color/graphic story for a Nike product category (running, training, or sportswear apparel). Show: cultural insight → trend board → color palette (with Pantone/hex calls) → graphic application on product → campaign visual. This is what lands interviews.</p>
+      </div>
+    </div>
+    <div class="portfolio-step">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <h4>About: Short, Confident, No Career Summary</h4>
+        <p>Two short paragraphs max. What you design, how you think, what you care about. One line about being based in Portland. A portrait that feels like you. Link to contact. No "I am passionate about." No career timeline. They can read that on your resume.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>3 Strong Nike-Specific Case Study Ideas</h3>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-num">A</div>
+      <h4>"Move to Zero" Seasonal Color Story</h4>
+      <p>Build a color and material palette for a Nike sustainable apparel capsule. Show cultural research → palette development → CMF callouts → graphic application. Demonstrates color leadership and sustainability awareness — two things Nike actively prioritizes.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">B</div>
+      <h4>Jordan Brand Graphic System</h4>
+      <p>Design a seasonal apparel graphic collection anchored in a cultural moment (music, city, subculture). Show full graphic system: repeating pattern, hero tee graphic, shorts, accessories — with a narrative that connects culture to product. Jordan hires for exactly this.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">C</div>
+      <h4>Running Apparel CMF Story</h4>
+      <p>Pick a Nike Running seasonal theme. Build the color blocking and CMF story: color palette with emotional rationale, material/finish direction, how color translates across styles in a line. Include a one-page "color brief" the way a Senior Color Designer would deliver it internally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GAPS -->
+<section id="gaps">
+  <div class="section-label">05 · Gaps & Fixes</div>
+  <h2>WHAT'S MISSING<br>& HOW TO FIX IT</h2>
+  <p>Honest assessment. These aren't dealbreakers — but they're things Nike recruiters will notice. Here's how to close them fast.</p>
+
+  <div class="gap-row">
+    <div class="gap-card problem">
+      <div class="gap-label">Gap</div>
+      <h4>No Nike-Adjacent Brand on Resume</h4>
+      <p>You've never worked for a sportswear, footwear, or athletic brand. That's the most common recruiter hesitation at Nike.</p>
+    </div>
+    <div class="gap-card fix">
+      <div class="gap-label">Fix</div>
+      <h4>Build a Spec Project Now</h4>
+      <p>One strong, Nike-spec self-initiated case study in your portfolio erases this concern. It shows initiative and proves you understand the category without needing to be told. Do this before you apply.</p>
+    </div>
+
+    <div class="gap-card problem">
+      <div class="gap-label">Gap</div>
+      <h4>CMF Work Isn't Visually Documented</h4>
+      <p>You talk about CMF in your resume, but if you can't show material/finish decision-making visually in your portfolio, it reads as buzzword rather than skill.</p>
+    </div>
+    <div class="gap-card fix">
+      <div class="gap-label">Fix</div>
+      <h4>Document the Candle Line as a CMF Case Study</h4>
+      <p>Photograph or recreate the material boards, finish callouts, and design decisions from the candle product line. Even a reconstructed process board is better than nothing. This is your CMF proof point.</p>
+    </div>
+
+    <div class="gap-card problem">
+      <div class="gap-label">Gap</div>
+      <h4>Freelance 2020–Present Reads as Unfocused</h4>
+      <p>Political campaigns + candles + grocery branding + private label = scattered. Recruiters scan for cohesion, and a scattered freelance period raises flags at a brand-focused company like Nike.</p>
+    </div>
+    <div class="gap-card fix">
+      <div class="gap-label">Fix</div>
+      <h4>Re-frame as "Studio Practice"</h4>
+      <p>Lead with the 2–3 projects most relevant to the specific Nike role you're applying to. In your portfolio, only show work that maps to that role. Your resume already positions it as "Freelance & Studio Projects" — lean into the studio framing and curate ruthlessly.</p>
+    </div>
+
+    <div class="gap-card problem">
+      <div class="gap-label">Gap</div>
+      <h4>No Footwear-Specific Work</h4>
+      <p>Nike is fundamentally a footwear company. Footwear color blocking and upper graphic design are specific skills they test for. Your resume mentions it in skills but there's no proof.</p>
+    </div>
+    <div class="gap-card fix">
+      <div class="gap-label">Fix</div>
+      <h4>Add a Footwear Color Study to Your Spec Project</h4>
+      <p>Within your Nike spec case study, include one footwear color blocking exploration — even as a supporting slide. Use an existing Nike silhouette. Show you understand upper/midsole/outsole color relationships and material callouts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LINKEDIN -->
+<section id="linkedin">
+  <div class="section-label">06 · LinkedIn Summary</div>
+  <h2>LINKEDIN<br>REWRITE</h2>
+  <p>Your current summary reads as a resume paste. LinkedIn summaries need to feel like a person wrote them — first person, specific, with a clear point of view. Here's the rewrite:</p>
+
+  <div class="linkedin-box">
+    <p>
+      I design systems that move product — not just assets that look good in a deck.<br><br>
+
+      Over 13 years I've worked across graphic design, color, CMF, and product development in retail, apparel, and CPG. At 99 Cents Only I built seasonal graphic and product systems that drove $19.83M in sales and 21% year-over-year growth. As a freelance designer, I've led everything from concept-to-shelf product creation for a luxury candle line in Costco and IKEA, to a rebrand that secured a client $1.2M in private funding within two months.<br><br>
+
+      My background spans the full design pipeline: trend research → color and CMF development → production-ready files → international vendor management. I've built brand systems, seasonal collections, packaging, apparel graphics, and product lines — and I know how all of those things have to work together for design to actually land in market.<br><br>
+
+      Based in Portland. Currently exploring senior design opportunities in sportswear, apparel, and footwear — particularly at companies where the design team has a real seat at the product table.<br><br>
+
+      Portfolio: jensonnelson.com
+    </p>
+  </div>
+</section>
+
+<!-- OUTREACH -->
+<section id="outreach">
+  <div class="section-label">07 · Nike Outreach</div>
+  <h2>MESSAGES THAT<br>DON'T FEEL DESPERATE</h2>
+  <p>Two versions. Use whichever fits the person. The rule: specific over generic, curious over needy, short over long.</p>
+
+  <div class="outreach-box">
+    <h4>Version A — For a Nike Designer or Design Manager (Cold)</h4>
+    <p>
+      "Hi [Name] — I've been following your work on [specific project/team/category] and wanted to reach out directly rather than just applying into the void.<br><br>
+
+      I'm a Senior Designer with a background in color, graphics, and product — most recently building seasonal systems for retail at scale and leading CMF product development independently. I'm exploring opportunities at Nike specifically because I want to work where design decisions connect directly to product outcomes, not just brand assets.<br><br>
+
+      If you're open to a 15-minute conversation about your team or the design culture on [specific team/category], I'd genuinely value it. Happy to share my portfolio first if that's easier."
+    </p>
+  </div>
+
+  <div class="outreach-box" style="margin-top: 2px;">
+    <h4>Version B — For a Nike Recruiter or Talent Partner</h4>
+    <p>
+      "Hi [Name] — I'm a Portland-based Senior Designer with 13 years across color, graphics, and product design — most recently driving $19.83M in product sales through seasonal design systems and leading full CMF product creation for national retail.<br><br>
+
+      I'm actively targeting Senior Graphic Designer or Senior Color Designer roles at Nike and wanted to connect directly. I have a strong portfolio showing concept-to-shelf work and I'm happy to share it with you or the relevant team.<br><br>
+
+      Is there a right moment to connect, or a better person on your team to speak with about open roles in [Apparel / Footwear / Jordan / Sportswear]?"
+    </p>
+  </div>
+
+  <h3>Rules for Outreach</h3>
+  <div class="grid-2" style="margin-top: 24px;">
+    <div class="card">
+      <h4>Always reference something specific</h4>
+      <p>A campaign, a product launch, a team. Generic admiration reads as lazy. Specificity shows you actually pay attention to Nike's work.</p>
+    </div>
+    <div class="card">
+      <h4>Never ask for a job in the first message</h4>
+      <p>Ask for a conversation, input, or perspective. The relationship comes first. The referral or interview follows naturally if you're a real fit.</p>
+    </div>
+    <div class="card">
+      <h4>Follow up once, not three times</h4>
+      <p>Seven days after the first message, one follow-up. Something like: "Still happy to share my portfolio if timing works." Then let it go.</p>
+    </div>
+    <div class="card">
+      <h4>Your portfolio link does the heavy lifting</h4>
+      <p>Every outreach message should have your portfolio link. If the work is strong, it closes the loop without you having to say anything else.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Jenson Nelson · Nike Positioning Playbook · Built for Senior Design Roles · 2025</p>
+  <p style="color:rgba(255,71,19,0.5)">jensonnelson.com</p>
+</footer>
+
+</body>
+</html>

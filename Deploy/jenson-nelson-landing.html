@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jenson Nelson — Portfolio · Color · Graphics · Product Design</title>
+<meta name="description" content="Designer and maker with 13+ years building product, color systems, packaging, and apparel graphics — from sketchbook to retail shelf.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f4f0;
+    --orange: #FF4713;
+    --mid: #131313;
+    --dim: #3a3a3a;
+    --rule: rgba(255,255,255,0.07);
+    --serif: 'Bebas Neue', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--orange); text-decoration: none; transition: opacity 0.2s; }
+  a:hover { opacity: 0.8; }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    color: var(--white);
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: rgba(245,244,240,0.45);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); opacity: 1; }
+  .nav-cta {
+    background: var(--orange);
+    color: var(--black) !important;
+    padding: 8px 20px;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #e03e10; opacity: 1; }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'JN';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--serif);
+    font-size: clamp(280px, 38vw, 550px);
+    color: rgba(255,71,19,0.03);
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 28px;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7.5vw, 100px);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    max-width: 860px;
+    margin-bottom: 44px;
+  }
+  .hero-title span { color: var(--orange); }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(245,244,240,0.55);
+    max-width: 500px;
+    line-height: 1.75;
+    border-left: 2px solid var(--orange);
+    padding-left: 20px;
+  }
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    right: 48px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,244,240,0.2);
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .scroll-cue::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 56px;
+    background: rgba(255,71,19,0.35);
+  }
+
+  /* === SHARED SECTION === */
+  section { padding: 120px 48px; border-top: 1px solid var(--rule); }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    max-width: 80px;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(34px, 5vw, 60px);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 36px;
+  }
+  p { color: rgba(245,244,240,0.75); max-width: 700px; margin-bottom: 20px; }
+  strong { color: var(--white); font-weight: 500; }
+
+  /* === STATS === */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 56px;
+  }
+  .stat {
+    background: var(--mid);
+    padding: 40px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+  .stat:hover::after { transform: scaleX(1); }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 56px);
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,244,240,0.4);
+    line-height: 1.5;
+  }
+
+  /* === EXPERTISE TAGS === */
+  .expertise-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 40px;
+  }
+  .tag {
+    background: rgba(255,71,19,0.08);
+    border: 1px solid rgba(255,71,19,0.15);
+    padding: 6px 16px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(245,244,240,0.65);
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .tag:hover { border-color: rgba(255,71,19,0.5); color: var(--white); }
+
+  /* === WORK / EXPERIENCE === */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .work-card {
+    background: var(--mid);
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .work-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--orange);
+    transition: height 0.4s ease;
+  }
+  .work-card:hover::before { height: 100%; }
+  a.work-card { text-decoration: none; color: inherit; }
+  a.work-card .view-link {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    transition: letter-spacing 0.3s;
+  }
+  a.work-card:hover .view-link { letter-spacing: 0.18em; }
+  .work-card .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,244,240,0.3);
+    margin-bottom: 16px;
+  }
+  .work-card h4 {
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .work-card .role {
+    font-size: 12px;
+    color: var(--orange);
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+  .work-card .card-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.08);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: rgba(245,244,240,0.15);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .work-card .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .work-card p {
+    font-size: 14px;
+    color: rgba(245,244,240,0.5);
+    max-width: 100%;
+    margin: 0;
+    line-height: 1.7;
+    flex: 1;
+  }
+  .work-card .metric {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--orange);
+    letter-spacing: 0.02em;
+  }
+
+  /* === PITCH === */
+  .pitch-box {
+    background: var(--mid);
+    border-left: 3px solid var(--orange);
+    padding: 52px;
+    margin-top: 48px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: rgba(245,244,240,0.85);
+    max-width: 100%;
+  }
+  .pitch-box em {
+    color: var(--orange);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* === ABOUT === */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    margin-top: 48px;
+    align-items: start;
+  }
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--mid);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,244,240,0.2);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  /* If user adds a real image, hide the placeholder text */
+  .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(245,244,240,0.75);
+    max-width: 100%;
+  }
+  .about-text p + p { margin-top: 20px; }
+  .about-detail {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    gap: 48px;
+  }
+  .about-detail div {
+    font-size: 12px;
+    color: rgba(245,244,240,0.35);
+    letter-spacing: 0.06em;
+  }
+  .about-detail span {
+    display: block;
+    color: var(--white);
+    font-size: 14px;
+    margin-top: 4px;
+    letter-spacing: 0;
+  }
+
+  /* === CONTACT / CTA === */
+  .cta-section {
+    text-align: center;
+    padding: 140px 48px;
+  }
+  .cta-section h2 { margin: 0 auto 24px; }
+  .cta-section p {
+    max-width: 480px;
+    margin: 0 auto 48px;
+    color: rgba(245,244,240,0.5);
+  }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--black);
+    padding: 14px 36px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #e03e10; opacity: 1; }
+  .btn-secondary {
+    display: inline-block;
+    border: 1px solid rgba(245,244,240,0.15);
+    color: var(--white);
+    padding: 14px 36px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(245,244,240,0.4); opacity: 1; }
+
+  /* === FOOTER === */
+  footer {
+    padding: 48px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-size: 12px;
+    color: rgba(245,244,240,0.2);
+    margin: 0;
+    max-width: 100%;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.7s ease 0.2s both; }
+  .hero-title   { animation: fadeUp 0.7s ease 0.35s both; }
+  .hero-sub     { animation: fadeUp 0.7s ease 0.5s both; }
+
+  /* Scroll-triggered fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .work-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-photo { max-width: 260px; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px 60px; }
+    section, .cta-section { padding: 80px 24px; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { padding: 28px 24px; }
+    .pitch-box { padding: 32px 24px; font-size: 16px; }
+    .work-card { padding: 32px 24px; }
+    .about-detail { flex-direction: column; gap: 20px; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">JENSON NELSON</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Designer & Maker · Portland, OR</div>
+  <h1 class="hero-title">I MAKE THE <span>THING.</span><br>NOT JUST THE PICTURE OF IT.</h1>
+  <p class="hero-sub">13+ years designing product, building color systems, drawing graphics, and getting things made — from sketchbook to factory to retail shelf.</p>
+  <div class="scroll-cue">Scroll</div>
+</div>
+
+<!-- STATS -->
+<section id="impact">
+  <div class="section-label">By the Numbers</div>
+  <div class="stats reveal">
+    <div class="stat">
+      <div class="stat-num">$19.8M</div>
+      <div class="stat-label">In Sales from<br>Product I Designed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">21%</div>
+      <div class="stat-label">Year-over-Year<br>Growth I Built</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$1.2M</div>
+      <div class="stat-label">Funding Landed<br>off a Rebrand I Made</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">13+</div>
+      <div class="stat-label">Years Making<br>Color, Graphics & Product</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="section-label">Core Expertise</div>
+  <h2 class="reveal">WHAT I MAKE</h2>
+  <p class="reveal">I draw it, spec it, color it, build the production files, and get on the phone with the factory. I've done this across apparel, product, packaging, and brand — and I know what happens when design meets the real world.</p>
+  <div class="expertise-grid reveal">
+    <span class="tag">Apparel Graphics</span>
+    <span class="tag">Color Palettes & Blocking</span>
+    <span class="tag">CMF — Color, Material, Finish</span>
+    <span class="tag">Product Design & Development</span>
+    <span class="tag">Packaging & Dielines</span>
+    <span class="tag">Print · Pattern · Typography</span>
+    <span class="tag">Seasonal Collections</span>
+    <span class="tag">Brand Identity & Logo Systems</span>
+    <span class="tag">Trend Research & Moodboarding</span>
+    <span class="tag">Material Selection & Storytelling</span>
+    <span class="tag">Production-Ready Artwork</span>
+    <span class="tag">Vendor Communication & Specs</span>
+    <span class="tag">Adobe Illustrator · Photoshop · InDesign</span>
+    <span class="tag">Figma</span>
+    <span class="tag">3D Visualization</span>
+    <span class="tag">Hands-On Prototyping</span>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-label">Selected Work</div>
+  <h2 class="reveal">THINGS I'VE<br>MADE</h2>
+  <p class="reveal">Real work, real products, real results. I created the graphics, picked the colors, built the files, and got them made.</p>
+
+  <div class="work-grid reveal">
+
+    <a class="work-card" href="https://jensondoesit.com/nike-womens-fall" target="_blank" rel="noopener">
+      <div class="eyebrow">Apparel · Color · Concept</div>
+      <!-- ✏️ ADD IMAGE: Save as "work-nike-womens.jpg" next to this HTML file -->
+      <div class="card-img">Project image</div>
+      <h4>Nike Women's Fall</h4>
+      <div class="role">Theoretical · Seasonal Color & Apparel Concept</div>
+      <p>A self-initiated seasonal concept for Nike Women's — color palette, mood, graphic direction, and product application built from cultural research to finished apparel mockups.</p>
+      <div class="view-link">View Case Study →</div>
+    </a>
+
+    <a class="work-card" href="https://jensondoesit.com/page-6" target="_blank" rel="noopener">
+      <div class="eyebrow">Brand · Identity · Collateral</div>
+      <!-- ✏️ ADD IMAGE: Save as "work-modus.jpg" next to this HTML file -->
+      <div class="card-img">Project image</div>
+      <h4>Modus (formerly CT Defense)</h4>
+      <div class="role">Naming, Identity & Investor Materials</div>
+      <p>Named it, designed the mark, built the identity system, and created the investor deck and collateral that went into the room.</p>
+      <div class="metric">$1.2M Funded in 2 Months</div>
+      <div class="view-link">View Case Study →</div>
+    </a>
+
+    <a class="work-card" href="https://jensondoesit.com/brand-identity" target="_blank" rel="noopener">
+      <div class="eyebrow">Brand · Identity · Packaging</div>
+      <!-- ✏️ ADD IMAGE: Save as "work-nostos.jpg" next to this HTML file -->
+      <div class="card-img">Project image</div>
+      <h4>Nostos International Grocery</h4>
+      <div class="role">Full Brand System — Logo through Signage</div>
+      <p>Designed everything from scratch: logo, color palette, type system, packaging, signage, staff uniforms, in-store materials. A complete identity built to work across cultures and formats.</p>
+      <div class="view-link">View Case Study →</div>
+    </a>
+
+    <a class="work-card" href="https://jensondoesit.com/page-13" target="_blank" rel="noopener">
+      <div class="eyebrow">Apparel · Color · Concept</div>
+      <!-- ✏️ ADD IMAGE: Save as "work-concept.jpg" next to this HTML file -->
+      <div class="card-img">Project image</div>
+      <h4>Concept Project</h4>
+      <div class="role">Theoretical · In Progress</div>
+      <p>Another self-initiated concept exploring color, graphics, and product application — currently in development.</p>
+      <div class="view-link">View Work in Progress →</div>
+    </a>
+
+  </div>
+
+</section>
+
+<!-- PITCH -->
+<section id="pitch">
+  <div class="section-label">In My Own Words</div>
+  <h2 class="reveal">THE SHORT<br>VERSION</h2>
+  <div class="pitch-box reveal">
+    "I'm a designer who makes things — <em>not decks about things.</em> For 13 years I've been drawing graphics, building color palettes, picking materials, creating packaging, and getting on calls with factories to make sure it all comes out right. The seasonal products I designed drove $19.83M in sales. A brand I built from naming to identity landed $1.2M in funding. I know what happens between a mood board and a shipping container, and <em>I've done every step in between with my own hands.</em> That's the part I love — the making."
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <h2 class="reveal">JENSON NELSON</h2>
+  <div class="about-grid reveal">
+
+    <div class="about-photo">
+      <img src="jenson-photo.jpg" alt="Jenson Nelson">
+    </div>
+
+    <div class="about-text">
+      <p>I'm a designer who started drawing and never really stopped — I just started drawing things that end up on shelves instead of walls. I came up at American Apparel making apparel graphics and production art, moved into high-volume product and packaging design where I was hands-on with everything from color palettes to factory specs, and for the last five years I've been running my own studio making products, brands, and packaging from scratch.</p>
+
+      <p>I'm also a painter. That's where the color sense comes from — not a textbook, but thousands of hours mixing paint and seeing what happens. I bring that same eye and that same willingness to get my hands dirty to every design problem I touch.</p>
+
+      <!-- ✏️ FILL IN: Add a personal sentence or two if you'd like — what drives you, what you care about outside work, etc. -->
+
+      <div class="about-detail">
+        <div>Location<span>Portland, OR</span></div>
+        <div>Education<span>Cal State Long Beach</span></div>
+        <div>Also<span>Exhibited Painter · Grant Reviewer · Arts Coach</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="cta-section" id="contact">
+  <h2 class="reveal">LET'S TALK</h2>
+  <p class="reveal">Looking for a team that needs a designer who actually makes things. Sportswear, apparel, footwear — I want to get my hands on product.</p>
+  <div class="cta-buttons reveal">
+
+    <a href="mailto:jensonnelson@gmail.com" class="btn-primary">Email Me</a>
+    <a href="https://www.linkedin.com/in/jensonnelson/" class="btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 Jenson Nelson</p>
+  <p style="color: rgba(255,71,19,0.5);">jensonnelson@gmail.com</p>
+</footer>
+
+<!-- Scroll reveal script -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
